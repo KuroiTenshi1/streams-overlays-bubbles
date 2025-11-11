@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Bubble Text</title>
+    <style>
+        :root{
+            --bg:#0f1724;
+            --bubble:#1e293b;
+            --bubble-alt:#0ea5a4;
+            --text:#e6eef6;
+            --muted:#9aa6b2;
+            --radius:14px;
+            --padding:12px 16px;
+            --max-width:680px;
+        }
+
+        html,body{
+            height:100%;
+            margin:0;
+            font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+            background:linear-gradient(180deg,var(--bg),#071122);
+            color:var(--text);
+            -webkit-font-smoothing:antialiased;
+            -moz-osx-font-smoothing:grayscale;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            padding:32px;
+            box-sizing:border-box;
+        }
+
+        /* container holding chat bubbles */
+        .chat {
+            width:100%;
+            max-width:var(--max-width);
+            display:flex;
+            flex-direction:column;
+            gap:12px;
+        }
+
+        /* common bubble styles */
+        .bubble {
+            display:inline-block;
+            max-width:80%;
+            padding:var(--padding);
+            border-radius:var(--radius);
+            position:relative;
+            color:var(--text);
+            line-height:1.3;
+            word-wrap:break-word;
+            box-shadow:0 6px 18px rgba(2,6,23,0.6);
+            animation:pop .18s ease-in-out;
+        }
+
+        /* left aligned (incoming) */
+        .bubble.left {
+            align-self:flex-start;
+            background:linear-gradient(180deg,var(--bubble),#162534);
+            border-bottom-left-radius:6px;
+        }
+        .bubble.left::after{
+            content:"";
+            position:absolute;
+            left:-8px;
+            top:12px;
+            width:0;height:0;
+            border-top:10px solid transparent;
+            border-bottom:10px solid transparent;
+            border-right:10px solid var(--bubble);
+            filter:drop-shadow(-1px 2px 2px rgba(0,0,0,0.18));
+            transform:translateX(-1px);
+        }
+
+        /* right aligned (outgoing/highlight) */
+        .bubble.right {
+            align-self:flex-end;
+            background:linear-gradient(180deg,var(--bubble-alt),#5f8fcf);
+            color:#062024;
+            border-bottom-right-radius:6px;
+        }
+        .bubble.right::after{
+            content:"";
+            position:absolute;
+            right:-8px;
+            top:12px;
+            width:0;height:0;
+            border-top:10px solid transparent;
+            border-bottom:10px solid transparent;
+            border-left:10px solid var(--bubble-alt);
+            filter:drop-shadow(1px 2px 2px rgba(0,0,0,0.12));
+            transform:translateX(1px);
+        }
+
+        /* small meta text */
+        .meta{
+            display:block;
+            font-size:12px;
+            color:var(--muted);
+            margin-top:6px;
+        }
+
+        @keyframes pop{
+            from{transform:scale(.98);opacity:0}
+            to{transform:none;opacity:1}
+        }
+
+        /* responsive tweaks */
+        @media (max-width:420px){
+            :root{--padding:10px 12px}
+            .bubble{max-width:92%}
+        }
+    </style>
+</head>
+<body>
+    <main class="chat" role="region" aria-label="Chat bubbles example">
+        <div class="bubble right" aria-label="Outgoing message">
+            Nice! You can use this for overlays, chatbox widgets, or chat UIs.
+            <span class="meta">You • now</span>
+        </div>
+    </main>
+</body>
+</html></div>
